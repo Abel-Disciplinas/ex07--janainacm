@@ -23,10 +23,35 @@ Resolve o sistema Ax = b, **substituindo** o b por x.
 """
 function reslu(A, b)
     n = length(b)
+    for i=1:n
+        for j=1:n-1
+            b[i]=b[i]-A[i,j]*b[j]
+        end
+    end
+    for i=n:-1:1
+        s=b[i]
+        for j=i+1:n
+            s=s-A[i,j]*b[j]
+        end
+        b[i]=s/A[i,i]
+    end
     return b
 end
 
 function reslu2(A, b)
+    n = length(b)
+    for j=1:n
+        for i=j+1:n
+            b[i]=b[i]-A[i,j]*b[j]
+        end
+    end
+    for i=n:-1:1
+        s=b[i]
+        for j=i+1:n
+            s=s-A[i,j]*b[j]
+        end
+        b[i]=s/A[i,i]
+    end
     return b
 end
 
